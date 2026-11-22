@@ -7,7 +7,7 @@ st.set_page_config(page_title="กระดานเสนอนโยบาย"
 
 st.markdown("""
 <style>
-.avatar{width:48px;height:48px;border-radius:50%;background:#eee;flex-shrink:0}
+.avatar{width:30px;height:30px;border-radius:50%;background:#eee;flex-shrink:0}
 .nick{font-weight:700;font-size:1.05rem;margin:0}
 .idea{margin:6px 0 0 0;white-space:pre-wrap;line-height:1.6}
 </style>
@@ -56,14 +56,15 @@ for i, n, t in rows:
 
 
     with st.container(border=True):
+                idea_html = html.escape(t).replace("\n", "<br>")
         st.markdown(
-            f"""<div style="display:flex;gap:12px;align-items:flex-start">
-            <img class="avatar" src="{html.escape(avatar_url(n))}" alt="">
-
-            <div style="flex:1"><p class="nick">{html.escape(n)}</p>
-            <p class="idea">{html.escape(t)}</p></div></div>""",
+            f'<div style="display:flex;gap:10px;align-items:flex-start">'
+            f'<img class="avatar" src="{html.escape(avatar_url(n))}" alt="">'
+            f'<div style="flex:1"><p class="nick">{html.escape(n)}</p>'
+            f'<p class="idea">{idea_html}</p></div></div>',
             unsafe_allow_html=True,
         )
+
         if admin and st.button("🗑️ ลบ", key=f"d{i}"):
             conn.execute("DELETE FROM policies WHERE id=?", (i,))
             conn.commit()
