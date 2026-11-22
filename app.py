@@ -47,7 +47,7 @@ rows = conn.execute("SELECT id, nick, idea FROM policies ORDER BY id DESC").fetc
 
 st.subheader(f"นโยบายทั้งหมด ({len(rows)})")
 if not rows:
-    st.info("ยังไม่มีนโยบาย เสนอคนแรกมาเอา 5 บาท ( ล้อเล่น ) 🥺")
+    st.info("ยังไม่มีนโยบาย เสนอคนแรกมาเอา 5 บาท (ล้อเล่น) 🥺")
 
 for i, n, t in rows:
     color = COLORS[sum(map(ord, n)) % len(COLORS)]
