@@ -62,9 +62,10 @@ except Exception:
 
 try:
     rows = get_rows()
-except Exception:
+except Exception as e:
     rows = []
-    st.error("โหลดรายการไม่สำเร็จง่ะ ลองรีเฟรชหน้าอีกครั้งนะจ๊ะ")
+    st.error(f"โหลดรายการไม่สำเร็จง่ะ: {e}")
+
 
 st.subheader(f"นโยบายทั้งหมด ({len(rows)})")
 if not rows:
