@@ -17,13 +17,13 @@ conn = sqlite3.connect("policies.db", check_same_thread=False)
 conn.execute("CREATE TABLE IF NOT EXISTS policies (id INTEGER PRIMARY KEY AUTOINCREMENT, nick TEXT, idea TEXT)")
 conn.commit()
 
-STYLE = "fun-emoji"  # เปลี่ยนได้ เช่น adventurer, bottts, thumbs, lorelei
+STYLE = "fun-emoji"  # เปลี่ยนแนวรูปได้ เช่น adventurer, bottts, thumbs, lorelei
 
 def avatar_url(name):
     return f"https://api.dicebear.com/9.x/{STYLE}/svg?seed={quote(name)}"
 
 st.title("📣 เสนอนโยบายมาเยย 🥺🥺")
-st.caption("ใส่ชื่อเล่น แล้วเขียนแนวคิดนโยบายได้เยย 👅💦🥺🤘")
+st.caption("ใส่ชื่อเล่น แล้วเขียนแนวคิดนโยบายมาเยย 🤘💦👅🥺")
 
 with st.form("f", clear_on_submit=True):
     nick = st.text_input("ชื่อเล่น", max_chars=30)
@@ -50,21 +50,17 @@ rows = conn.execute("SELECT id, nick, idea FROM policies ORDER BY id DESC").fetc
 
 st.subheader(f"นโยบายทั้งหมด ({len(rows)})")
 if not rows:
-    st.info("ยังไม่มีนโยบาย เสนอคนแรกมาเอา 5 บาท (ล้อเล่น) 🥺")
+    st.info("ยังไม่มีนโยบาย ใครเสนอคนแรกมาเอา 5 บาท (ล้อเล่น) 🥺")
 
 for i, n, t in rows:
-
-
     with st.container(border=True):
-                idea_html = html.escape(t).replace("\n", "<br>")
         st.markdown(
-            f'<div style="display:flex;gap:10px;align-items:flex-start">'
-            f'<img class="avatar" src="{html.escape(avatar_url(n))}" alt="">'
-            f'<div style="flex:1"><p class="nick">{html.escape(n)}</p>'
-            f'<p class="idea">{idea_html}</p></div></div>',
+            f"""<div style="display:flex;gap:12px;align-items:flex-start">
+            <img class="avatar" src="{html.escape(avatar_url(n))}" alt="">
+            <div style="flex:1"><p class="nick">{html.escape(n)}</p>
+            <p class="idea">{html.escape(t)}</p></div></div>""",
             unsafe_allow_html=True,
         )
-
         if admin and st.button("🗑️ ลบ", key=f"d{i}"):
             conn.execute("DELETE FROM policies WHERE id=?", (i,))
             conn.commit()
