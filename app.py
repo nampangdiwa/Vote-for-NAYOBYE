@@ -60,11 +60,6 @@ try:
 except Exception:
     admin = False
 
-try:
-    rows = get_rows()
-except Exception as e:
-    rows = []
-    st.error(f"โหลดรายการไม่สำเร็จง่ะ: {e}")
 
 
 st.subheader(f"นโยบายทั้งหมด ({len(rows)})")
