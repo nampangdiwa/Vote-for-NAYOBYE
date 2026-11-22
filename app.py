@@ -1,0 +1,30 @@
+import sqlite3
+import streamlit as st
+
+conn = sqlite3.connect("policies.db", check_same_thread=False)
+conn.execute("CREATE TABLE IF NOT EXISTS policies (id INTEGER PRIMARY KEY AUTOINCREMENT, nick TEXT, idea TEXT)")
+conn.commit()
+
+st.title("📣 เสนอนโยบายมาเยย 🥺🥺")
+
+with st.form("f", clear_on_submit=True):
+    nick = st.text_input("ชื่อเล่น", max_chars=30)
+    idea = st.text_area("แนวคิดนโยบาย", max_chars=500)
+    ok = st.form_submit_button("ส่งนโยบาย")
+
+if ok:
+    if nick.strip() and idea.strip():
+        conn.execute("INSERT INTO policies (nick, idea) VALUES (?, ?)", (nick.strip(), idea.strip()))
+        conn.commit()
+        st.success("ส่งแล้วงับ ✓")
+    else:
+        st.warning("กรอกให้ครบทั้งสองช่องนะ")
+
+st.subheader("นโยบายทั้งหมด")
+rows = conn.execute("SELECT nick, idea FROM policies ORDER BY id DESC").fetchall()
+if not rows:
+    st.write("ยังไม่มีนโยบาย ส่งคนแรกมาเอา 5 บาท🥺🥺!")
+for n, i in rows:
+    st.markdown(f"**{n}**")
+    st.write(i)
+    st.divider()
