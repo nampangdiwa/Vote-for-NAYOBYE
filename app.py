@@ -59,6 +59,11 @@ try:
     admin = pw != "" and pw == st.secrets["ADMIN_PASSWORD"]
 except Exception:
     admin = False
+try:
+    rows = get_rows()
+except Exception as e:
+    rows = []
+    st.error(f"โหลดรายการไม่สำเร็จ: {e}")
 
 
 
