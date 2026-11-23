@@ -25,6 +25,11 @@ try:
     ADMIN_PW = st.secrets["ADMIN_PASSWORD"]
 except Exception:
     ADMIN_PW = None
+try:
+    PROPOSALS_OPEN = str(st.secrets["PROPOSALS_OPEN"]).lower() != "false"
+except Exception:
+    PROPOSALS_OPEN = True
+
 
 STYLE = "fun-emoji"
 ALPHABET = "abcdefghjkmnpqrstuvwxyz23456789"
