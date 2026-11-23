@@ -104,14 +104,12 @@ tab_prop, tab_vote, tab_admin = st.tabs(["💡 เสนอนโยบาย", 
 # ---------- เสนอนโยบาย ----------
 with tab_prop:
     st.caption("ใส่ชื่อเล่น แล้วเขียนแนวคิดนโยบายของคุณ")
-        if not PROPOSALS_OPEN:
+    if not PROPOSALS_OPEN:
         st.warning("ปิดรับนโยบายแล้ว ไปโหวตได้ที่แท็บ 🗳️ โหวต")
-
     with st.form("propose", clear_on_submit=True):
         nick = st.text_input("ชื่อเล่น", max_chars=30)
         idea = st.text_area("แนวคิดนโยบาย", max_chars=500, height=110)
         ok = st.form_submit_button("ส่งนโยบาย", use_container_width=True, disabled=not PROPOSALS_OPEN)
-
     if ok:
         if nick.strip() and idea.strip():
             try:
@@ -121,6 +119,8 @@ with tab_prop:
                 st.error("ส่งไม่สำเร็จ ลองใหม่อีกครั้งนะ")
         else:
             st.warning("กรอกให้ครบทั้งสองช่องนะ")
+
+
 
 # ---------- โหวต ----------
 with tab_vote:
