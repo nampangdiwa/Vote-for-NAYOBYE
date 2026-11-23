@@ -99,7 +99,7 @@ def live_results():
 
 
 st.title("📣 กระดานนโยบาย")
-tab_prop, tab_vote, tab_admin = st.tabs(["💡 เสนอนโยบาย", "🗳️ โหวต", "🔒 แอดมิน"])
+tab_prop, tab_vote, tab_admin = st.tabs(["💡 เสนอนโยบาย", "🗳️ โหวต", "🔒 เฉพาะพี่น้ำแป้ง"])
 
 # ---------- เสนอนโยบาย ----------
 with tab_prop:
