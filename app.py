@@ -110,7 +110,8 @@ with tab_prop:
     with st.form("propose", clear_on_submit=True):
         nick = st.text_input("ชื่อเล่น", max_chars=30)
         idea = st.text_area("แนวคิดนโยบาย", max_chars=500, height=110)
-        ok = st.form_submit_button("ส่งนโยบาย", use_container_width=True)
+        ok = st.form_submit_button("ส่งนโยบาย", use_container_width=True, disabled=not PROPOSALS_OPEN)
+
     if ok:
         if nick.strip() and idea.strip():
             try:
