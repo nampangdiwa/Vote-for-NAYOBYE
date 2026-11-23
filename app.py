@@ -162,7 +162,7 @@ with tab_vote:
 
 # ---------- แอดมิน ----------
 with tab_admin:
-    pw = st.text_input("รหัสผ่านแอดมิน", type="password")
+    pw = st.text_input("รหัสผ่านของเทพ", type="password")
     if not (ADMIN_PW and pw == ADMIN_PW):
         st.caption("ใส่รหัสผ่านเพื่อจัดการ")
     else:
